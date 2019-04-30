@@ -32,7 +32,7 @@ questions()
 function questions() {
     inquirer.prompt([
         {
-            message: "Type in the product ID to place an order/",
+            message: "Type in the product ID to place an order.",
             type: "input",
             name: "productID"
         },
