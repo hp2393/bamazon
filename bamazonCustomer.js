@@ -12,7 +12,7 @@ var connection = mysql.createConnection({
     user: "root",
   
     // inser your SQL password
-    password: "INSERT_Password",
+    password: "INSERT PASSWORD",
     database: "bamazon_db"
 });
 
@@ -44,5 +44,35 @@ function questions() {
     ]).then(function (response) {
         var productID = response.productID;
         var productQTY = response.productQTY;
+        purchase(productID, productQTY)
     });
+};
+
+function purchase(productID, productQTY) {
+    connection.query("SELECT * FROM products", function (error, response) {
+      if (error) throw error;
+      var product;
+      for(var i = 0; i < response.length; i++){
+        if(response[i].item_id == productID){
+          product = response[i]
+        }
+      }
+      console.log(product, "Great, we found your item")
+        if(product.stock_quantity >= productQTY){
+            placedOrder(product, productID, productQTY)
+            connection.end()
+        }else{
+            console.log("We apologize, your iteam is currently out of stock. Please try again later")
+            connection.end()
+        }
+    })
+};
+
+function placedOrder (productObj, productID, productQTY) {
+    var newQty = productObj.stock_quantity - productQTY;
+    var sold = productObj.price * productQTY;
+    var queryOne = "UPDATE products SET stock_quantity = ? where ?";
+    var queryTwo = "UPDATE products SET product_sales = ? where ?";
+    connection.query(queryOne,[newQty, {item_id: productID}], function (error, response) {})
+    connection.query(queryTwo, [sold, { item_id: productID }], function (error, response) {})
 };
