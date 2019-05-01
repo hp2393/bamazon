@@ -17,9 +17,9 @@ BAMAZON is an Amazon like storefront created with mySQL. The app will take in or
 ## How to use BAMAZON
 
 1. Clone repo on your computer.
-2. Install MySQL and inquirer packages
+2. Install MySQL and inquirer packages (```npm install mysql, npm install inquirer```)
 3. Insert your MySQL workbench password on line 15
-4. Type in node bamazonCustomer.js and run the command to place your order
+4. Type in ```node bamazonCustomer.js```  and run the command to place your order
 
 
 ## Problems faced:

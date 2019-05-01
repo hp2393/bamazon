@@ -22,7 +22,7 @@ function start (){
     connection.query("SELECT * FROM products", function (error, response) {
         if (error) throw error;
         response.forEach(row => {
-            console.log(`Id: ${row.item_id} Name: ${row.product_name} Price: ${row.price}\n` )
+            console.log(`Id: ${row.item_id} Name: ${row.product_name} Price: ${row.price} Quantity: ${row.stock_quantity}\n` )
         });
     })
 };
